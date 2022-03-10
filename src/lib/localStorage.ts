@@ -11,10 +11,13 @@ type StoredShareStatus = {
   isHardMode: boolean
 }
 
-export const saveShareStatusToLocalStorage = (isHintMode: boolean, isHardMode: boolean) => {
+export const saveShareStatusToLocalStorage = (
+  isHintMode: boolean,
+  isHardMode: boolean
+) => {
   const shareStatus = {
     isHintMode,
-    isHardMode
+    isHardMode,
   }
   localStorage.setItem(shareStatusKey, JSON.stringify(shareStatus))
 }
@@ -26,7 +29,7 @@ export const removeShareStatusFromLocalStorage = () => {
 export const loadShareStatusFromLocalStorage = () => {
   const state = localStorage.getItem(shareStatusKey)
   if (state) {
-    return (JSON.parse(state) as StoredShareStatus)
+    return JSON.parse(state) as StoredShareStatus
   } else {
     return null
   }
@@ -52,12 +55,12 @@ export const loadGameStateFromLocalStorage = () => {
           boardState.push(parsedInheritedGameState['boardState'][i])
         }
       }
-      return ({
+      return {
         guesses: boardState,
-        solution: parsedInheritedGameState.solution
-      } as StoredGameState)
+        solution: parsedInheritedGameState.solution,
+      } as StoredGameState
     } else {
-      return (JSON.parse(state) as StoredGameState)
+      return JSON.parse(state) as StoredGameState
     }
   } else {
     return null
@@ -69,7 +72,7 @@ const inheritedGameStatKey = 'statistics'
 export type inheritedStatsType = {
   currentStreak: number
   maxStreak: number
-  guesses: {[key: string]: number;}
+  guesses: { [key: string]: number }
   winPercentage: number
   gamesPlayed: number
   gamesWon: number
@@ -94,11 +97,13 @@ export const saveStatsToLocalStorage = (gameStats: GameStats) => {
 export const loadStatsFromLocalStorage = () => {
   const stats = localStorage.getItem(gameStatKey)
   if (stats) {
-    return (JSON.parse(stats) as GameStats)
+    return JSON.parse(stats) as GameStats
   } else {
     const inheritedStats = localStorage.getItem(inheritedGameStatKey)
     if (inheritedStats) {
-      let parsedInheritedStats = (JSON.parse(inheritedStats) as inheritedStatsType)
+      let parsedInheritedStats = JSON.parse(
+        inheritedStats
+      ) as inheritedStatsType
       if (parsedInheritedStats) {
         let inheritedWinDistribution = [
           parsedInheritedStats['guesses']['1'],
@@ -114,14 +119,16 @@ export const loadStatsFromLocalStorage = () => {
           parsedInheritedStats['guesses']['11'],
           parsedInheritedStats['guesses']['12'],
         ]
-        return ({
+        return {
           winDistribution: inheritedWinDistribution,
-          gamesFailed: (parsedInheritedStats['gamesPlayed'] - parsedInheritedStats['gamesWon']),
+          gamesFailed:
+            parsedInheritedStats['gamesPlayed'] -
+            parsedInheritedStats['gamesWon'],
           currentStreak: parsedInheritedStats['currentStreak'],
           bestStreak: parsedInheritedStats['maxStreak'],
           totalGames: parsedInheritedStats['gamesPlayed'],
-          successRate: parsedInheritedStats['winPercentage']
-        } as GameStats)
+          successRate: parsedInheritedStats['winPercentage'],
+        } as GameStats
       }
     } else {
       return null
@@ -168,7 +175,10 @@ export const getStoredDisplayLanguage = () => {
   if (localStorage.getItem(displayLanguageKey)) {
     return localStorage.getItem(displayLanguageKey)
   } else {
-    const displayLanguage = (navigator.language === PREFERRED_DISPLAY_LANGUAGE ? PREFERRED_DISPLAY_LANGUAGE : 'en')
+    const displayLanguage =
+      navigator.language === PREFERRED_DISPLAY_LANGUAGE
+        ? PREFERRED_DISPLAY_LANGUAGE
+        : 'en'
     setStoredDisplayLanguage(displayLanguage)
     return displayLanguage
   }

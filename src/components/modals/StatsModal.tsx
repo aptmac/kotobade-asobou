@@ -4,9 +4,14 @@ import { StatBar } from '../stats/StatBar'
 import { Histogram } from '../stats/Histogram'
 import { GameStats, getStoredIsHighContrastMode } from '../../lib/localStorage'
 import { shareStatus } from '../../lib/share'
-import { yesterdaySolution, yesterdaySolutionIndex, solutionIndex, tomorrow } from '../../lib/words'
+import {
+  yesterdaySolution,
+  yesterdaySolutionIndex,
+  solutionIndex,
+  tomorrow,
+} from '../../lib/words'
 import { BaseModal } from './BaseModal'
-import { t, JISHO_SEARCH_LINK } from '../../constants/strings';
+import { t, JISHO_SEARCH_LINK } from '../../constants/strings'
 
 export type shareStatusType = 'text' | 'clipboard' | 'tweet'
 
@@ -83,22 +88,32 @@ export const StatsModal = ({
       </div>
       <div className="flex gap-1 justify-center text-sm dark:text-white mx-1">
         {t('YESTERDAY_CORRECT_WORD_MESSAGE', yesterdaySolutionIndex.toString())}
-        <a className="underline text-sm text-gray-600 dark:text-gray-300 cursor-zoom-in" href={(JISHO_SEARCH_LINK + yesterdaySolution)} rel="noreferrer" target="_blank">{yesterdaySolution}</a>
+        <a
+          className="underline text-sm text-gray-600 dark:text-gray-300 cursor-zoom-in"
+          href={JISHO_SEARCH_LINK + yesterdaySolution}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {yesterdaySolution}
+        </a>
       </div>
       {(isGameLost || isGameWon) && (
         <div>
           <div className="mt-4 sm:mt-5 mb-1 dark:text-white mx-1">
-            <textarea className="local-font text-xs w-full border-solid border-2 rounded bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600" rows={5}
+            <textarea
+              className="local-font text-xs w-full border-solid border-2 rounded bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600"
+              rows={5}
               value={shareStatus(
-                  'text',
-                  guesses,
-                  isGameLost,
-                  isHintMode,
-                  isHardMode,
-                  isDarkMode,
-                  isHighContrastMode,
-                  handleShareToClipboard
-              )} />          
+                'text',
+                guesses,
+                isGameLost,
+                isHintMode,
+                isHardMode,
+                isDarkMode,
+                isHighContrastMode,
+                handleShareToClipboard
+              )}
+            />
           </div>
           <div className="mb-5 sm:mb-6 grid grid-cols-2 gap-3 dark:text-white mx-1">
             <div>
@@ -135,7 +150,7 @@ export const StatsModal = ({
                     isDarkMode,
                     isHighContrastMode,
                     handleShareToClipboard
-                  )                  
+                  )
                 }}
               >
                 {t('TWEET_TEXT')}

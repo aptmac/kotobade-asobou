@@ -32,18 +32,12 @@ export const Key = ({
       'transition ease-in-out': isRevealing,
       'bg-slate-200 dark:bg-slate-600 hover:bg-slate-300 active:bg-slate-400':
         !status,
-      'absent key-bg':
-        status === 'absent',
-      'correct key-bg':
-        status === 'correct',
-      'present key-bg':
-        status === 'present',
-      'close key-bg':
-        status === 'close',
-      'consonant key-bg':
-        status === 'consonant',
-      'vowel key-bg':
-        status === 'vowel',
+      'absent key-bg': status === 'absent',
+      'correct key-bg': status === 'correct',
+      'present key-bg': status === 'present',
+      'close key-bg': status === 'close',
+      'consonant key-bg': status === 'consonant',
+      'vowel key-bg': status === 'vowel',
     }
   )
 
@@ -63,13 +57,12 @@ export const Key = ({
       <button style={styles} className={dummyKeyClasses}>
         {children || value}
       </button>
-    )      
+    )
   } else {
     return (
       <button style={styles} className={keyClasses} onClick={handleClick}>
         {children || value}
       </button>
-    )  
+    )
   }
-
 }

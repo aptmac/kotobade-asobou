@@ -21,7 +21,7 @@ export const shareStatus = (
   isHighContrastMode: boolean,
   handleShareToClipboard: () => void
 ) => {
-  const endOfLine = (shareStatusType === 'tweet' ? '%0A' : '\n')
+  const endOfLine = shareStatusType === 'tweet' ? '%0A' : '\n'
   const loaded = loadShareStatusFromLocalStorage()
 
   if (loaded) {
@@ -29,22 +29,29 @@ export const shareStatus = (
     isHardMode = loaded.isHardMode
   }
 
-  const textToShare = 
-  `${GAME_TITLE} ${solutionIndex} ${
-    lost ? 'X' : guesses.length
-  }/${MAX_CHALLENGES}${isHardMode ? '*' : ''}${isHintMode ? '?' : ''}` + endOfLine +
-  `${GAME_LINK}` + endOfLine +
-    generateEmojiGrid(endOfLine, guesses, getEmojiTiles(isDarkMode, isHighContrastMode))
+  const textToShare =
+    `${GAME_TITLE} ${solutionIndex} ${
+      lost ? 'X' : guesses.length
+    }/${MAX_CHALLENGES}${isHardMode ? '*' : ''}${isHintMode ? '?' : ''}` +
+    endOfLine +
+    `${GAME_LINK}` +
+    endOfLine +
+    generateEmojiGrid(
+      endOfLine,
+      guesses,
+      getEmojiTiles(isDarkMode, isHighContrastMode)
+    )
 
   if (shareStatusType === 'tweet') {
-    window.open("https://twitter.com/intent/tweet?text=" + textToShare, "_blank")
-  }
-  else
-  if (shareStatusType === 'clipboard') {
+    window.open(
+      'https://twitter.com/intent/tweet?text=' + textToShare,
+      '_blank'
+    )
+  } else if (shareStatusType === 'clipboard') {
     const shareData = { text: textToShare }
 
     let shareSuccess = false
-  
+
     try {
       if (attemptShare(shareData)) {
         navigator.share(shareData)
@@ -53,19 +60,21 @@ export const shareStatus = (
     } catch (error) {
       shareSuccess = false
     }
-  
+
     if (!shareSuccess) {
       navigator.clipboard.writeText(textToShare)
       handleShareToClipboard()
     }
-  }
-  else
-  {
+  } else {
     return textToShare
   }
 }
 
-export const generateEmojiGrid = (endOfLine: string, guesses: string[], tiles: string[]) => {
+export const generateEmojiGrid = (
+  endOfLine: string,
+  guesses: string[],
+  tiles: string[]
+) => {
   return guesses
     .map((guess) => {
       const status = getGuessStatuses(guess)

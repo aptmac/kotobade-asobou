@@ -34,7 +34,7 @@ export const findFirstUnusedReveal = (word: string, guesses: string[]) => {
       lettersLeftArray.push(splitGuess[i])
     }
     if (statuses[i] === 'correct' && splitWord[i] !== splitGuess[i]) {
-      const position = (i + 1)
+      const position = i + 1
       return t('WRONG_SPOT_MESSAGE', splitGuess[i], position.toString())
     }
   }
@@ -81,11 +81,13 @@ export const getWordOfDay = () => {
   const now = Date.now()
   const msInDay = 86400000
   const index = Math.floor((now - epochMs) / msInDay)
-  const yesterdayIndex = (index > 0 ? index - 1 : 0)
+  const yesterdayIndex = index > 0 ? index - 1 : 0
   const nextday = (index + 1) * msInDay + epochMs
 
   return {
-    yesterdaySolution: localeAwareUpperCase(WORDS[yesterdayIndex % WORDS.length]),
+    yesterdaySolution: localeAwareUpperCase(
+      WORDS[yesterdayIndex % WORDS.length]
+    ),
     yesterdaySolutionIndex: yesterdayIndex,
     solution: localeAwareUpperCase(WORDS[index % WORDS.length]),
     solutionIndex: index,
@@ -93,4 +95,10 @@ export const getWordOfDay = () => {
   }
 }
 
-export const { yesterdaySolution, yesterdaySolutionIndex, solution, solutionIndex, tomorrow } = getWordOfDay()
+export const {
+  yesterdaySolution,
+  yesterdaySolutionIndex,
+  solution,
+  solutionIndex,
+  tomorrow,
+} = getWordOfDay()

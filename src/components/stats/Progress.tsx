@@ -16,18 +16,17 @@ export const Progress = ({ index, size, label, currentDayStatRow }: Props) => {
     {
       'bg-orange-500': currentDayStatRow && isHighContrast,
       'bg-green-500': currentDayStatRow && !isHighContrast,
-      'bg-slate-400 dark:bg-slate-300': !currentDayStatRow
+      'bg-slate-400 dark:bg-slate-300': !currentDayStatRow,
     }
   )
 
   return (
     <div className="flex justify-left m-1">
-      <div className="items-center justify-center text-right w-4">{index + 1}</div>
+      <div className="items-center justify-center text-right w-4">
+        {index + 1}
+      </div>
       <div className="rounded-full w-full ml-2">
-        <div
-          style={{ width: `${8 + size}%` }}
-          className={classNames}
-        >
+        <div style={{ width: `${8 + size}%` }} className={classNames}>
           {label}
         </div>
       </div>

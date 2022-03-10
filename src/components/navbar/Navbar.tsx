@@ -20,7 +20,7 @@ export const Navbar = ({
   setIsSettingsModalOpen,
 }: Props) => {
   const gameHeading = GAME_TITLE.split(' ')
-  
+
   return (
     <div className="flex max-w-lg mx-auto items-center mb-2 md:mb-3 mt-0 md:mt-3">
       <h1 className="hidden">{GAME_TITLE}</h1>

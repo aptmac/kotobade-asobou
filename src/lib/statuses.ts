@@ -1,8 +1,21 @@
 import { solution, unicodeSplit } from './words'
-import { getStoredIsHintMode, loadShareStatusFromLocalStorage } from './localStorage'
-import { CLOSE_STATUS_KANA, CONSONANT_STATUS_KANA, VOWEL_STATUS_KANA } from '../constants/strings'
+import {
+  getStoredIsHintMode,
+  loadShareStatusFromLocalStorage,
+} from './localStorage'
+import {
+  CLOSE_STATUS_KANA,
+  CONSONANT_STATUS_KANA,
+  VOWEL_STATUS_KANA,
+} from '../constants/strings'
 
-export type CharStatus = 'absent' | 'vowel' | 'consonant' | 'present' | 'close' | 'correct'
+export type CharStatus =
+  | 'absent'
+  | 'vowel'
+  | 'consonant'
+  | 'present'
+  | 'close'
+  | 'correct'
 
 export const getStatuses = (
   guesses: string[]
@@ -19,7 +32,6 @@ export const getStatuses = (
 
   guesses.forEach((word) => {
     unicodeSplit(word).forEach((letter, i) => {
-
       if (isHintMode) {
         VOWEL_STATUS_KANA.forEach((kana) => {
           if (kana.includes(letter) && kana.includes(splitSolution[i])) {
@@ -43,7 +55,12 @@ export const getStatuses = (
         })
       }
 
-      if (!splitSolution.includes(letter) && !['vowel', 'consonant', 'present', 'close', 'correct'].includes(charObj[letter])) {
+      if (
+        !splitSolution.includes(letter) &&
+        !['vowel', 'consonant', 'present', 'close', 'correct'].includes(
+          charObj[letter]
+        )
+      ) {
         // make status absent
         return (charObj[letter] = 'absent')
       }
@@ -53,7 +70,10 @@ export const getStatuses = (
         return (charObj[letter] = 'correct')
       }
 
-      if (splitSolution.includes(letter) && !['close', 'correct'].includes(charObj[letter])) {
+      if (
+        splitSolution.includes(letter) &&
+        !['close', 'correct'].includes(charObj[letter])
+      ) {
         //make status present
         return (charObj[letter] = 'present')
       }

@@ -27,18 +27,12 @@ export const Cell = ({
       'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600':
         !status,
       'border-black dark:border-slate-100': value && !status,
-      'absent cell-bg':
-        status === 'absent',
-      'correct cell-bg':
-        status === 'correct',
-      'present cell-bg':
-        status === 'present',
-      'close cell-bg':
-        status === 'close',
-      'consonant cell-bg':
-        status === 'consonant',
-      'vowel cell-bg':
-        status === 'vowel',
+      'absent cell-bg': status === 'absent',
+      'correct cell-bg': status === 'correct',
+      'present cell-bg': status === 'present',
+      'close cell-bg': status === 'close',
+      'consonant cell-bg': status === 'consonant',
+      'vowel cell-bg': status === 'vowel',
       'cell-fill-animation': isFilled,
       'cell-reveal': shouldReveal,
     }

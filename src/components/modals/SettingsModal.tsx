@@ -1,6 +1,4 @@
-import {
-  TranslateIcon
-} from '@heroicons/react/outline'
+import { TranslateIcon } from '@heroicons/react/outline'
 import classnames from 'classnames'
 import { BaseModal } from './BaseModal'
 import { SettingsToggle } from './SettingsToggle'
@@ -38,19 +36,30 @@ export const SettingsModal = ({
   handleDisplayLanguage,
 }: Props) => {
   const isHighContrast = getStoredIsHighContrastMode()
-  
-  const aboutClassName = classnames((displayLanguage === PREFERRED_DISPLAY_LANGUAGE ? 'local-font' : ''), 'text-left text-sm text-gray-500 dark:text-gray-300')
+
+  const aboutClassName = classnames(
+    displayLanguage === PREFERRED_DISPLAY_LANGUAGE ? 'local-font' : '',
+    'text-left text-sm text-gray-500 dark:text-gray-300'
+  )
 
   return (
     <BaseModal title={t('Settings')} isOpen={isOpen} handleClose={handleClose}>
       <div className="grid-cols-2 gap-4">
         <div className="flex justify-between items-center gap-8 mt-3">
           <div className="text-left">
-            <h2 className="local-font text-base text-gray-600 dark:text-gray-300">{t('Language')}</h2>
+            <h2 className="local-font text-base text-gray-600 dark:text-gray-300">
+              {t('Language')}
+            </h2>
           </div>
-          <div className='w-36 text-right'>
+          <div className="w-36 text-right">
             <button
-              onClick={() => handleDisplayLanguage(displayLanguage === PREFERRED_DISPLAY_LANGUAGE ? 'en' : PREFERRED_DISPLAY_LANGUAGE)}
+              onClick={() =>
+                handleDisplayLanguage(
+                  displayLanguage === PREFERRED_DISPLAY_LANGUAGE
+                    ? 'en'
+                    : PREFERRED_DISPLAY_LANGUAGE
+                )
+              }
               className="local-font text-black dark:text-white shadow-none p-2 focus:outline-none text-lg rounded-full outline-none ring-transparent cursor-pointer"
             >
               <div className="flex mx-auto items-center">
@@ -72,7 +81,11 @@ export const SettingsModal = ({
           settingName={t('Hard Mode')}
           flag={isHardMode}
           handleFlag={handleHardMode}
-          description={t('HARD_MODE_DESCRIPTION', (isHighContrast ? '🟧' : '🟩'), (isHighContrast ? '🟦' : '🟨'))}
+          description={t(
+            'HARD_MODE_DESCRIPTION',
+            isHighContrast ? '🟧' : '🟩',
+            isHighContrast ? '🟦' : '🟨'
+          )}
         />
         <hr />
         <SettingsToggle
@@ -89,11 +102,29 @@ export const SettingsModal = ({
         <hr />
         <div className="flex justify-between items-center gap-8 mt-3">
           <div className="text-left">
-            <h2 className="local-font text-base text-gray-600 dark:text-gray-300">{t('Feedback')}</h2>
+            <h2 className="local-font text-base text-gray-600 dark:text-gray-300">
+              {t('Feedback')}
+            </h2>
           </div>
-          <div className='w-36 text-right'>
-            {' '}<a className="underline text-sm text-gray-600 dark:text-gray-300" href="https://github.com/taximanli/kotobade-asobou/issues" rel="noreferrer" target="_blank">Github</a>{' |'}
-            {' '}<a className="underline text-sm text-gray-600 dark:text-gray-300" href="https://twitter.com/taximanli" rel="noreferrer" target="_blank">Twitter</a>{' '}
+          <div className="w-36 text-right">
+            {' '}
+            <a
+              className="underline text-sm text-gray-600 dark:text-gray-300"
+              href="https://github.com/taximanli/kotobade-asobou/issues"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Github
+            </a>
+            {' |'}{' '}
+            <a
+              className="underline text-sm text-gray-600 dark:text-gray-300"
+              href="https://twitter.com/taximanli"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Twitter
+            </a>{' '}
           </div>
         </div>
       </div>
@@ -101,10 +132,24 @@ export const SettingsModal = ({
       <div className="grid-cols-1 gap-4">
         <div className="flex justify-between items-center gap-8 mt-3">
           <p className={aboutClassName}>
-            {t('This game is the')}
-            {' '}<a className="underline text-sm text-gray-600 dark:text-gray-300" href="https://github.com/taximanli/kotobade-asobou" rel="noreferrer" target="_blank">{t('Japanese version')}</a>{' '}
-            {t('word guessing game')}
-            {' '}<a className="underline text-sm text-gray-600 dark:text-gray-300" href="https://github.com/cwackerfuss/react-wordle" rel="noreferrer" target="_blank">{t('open source version')}</a>{' '}
+            {t('This game is the')}{' '}
+            <a
+              className="underline text-sm text-gray-600 dark:text-gray-300"
+              href="https://github.com/taximanli/kotobade-asobou"
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t('Japanese version')}
+            </a>{' '}
+            {t('word guessing game')}{' '}
+            <a
+              className="underline text-sm text-gray-600 dark:text-gray-300"
+              href="https://github.com/cwackerfuss/react-wordle"
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t('open source version')}
+            </a>{' '}
             {t('massive development')}
           </p>
         </div>

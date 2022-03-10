@@ -1,6 +1,9 @@
 import classnames from 'classnames'
 import { PREFERRED_DISPLAY_LANGUAGE } from '../../constants/settings'
-import { getStoredDisplayLanguage, getStoredIsHighContrastMode } from '../../lib/localStorage'
+import {
+  getStoredDisplayLanguage,
+  getStoredIsHighContrastMode,
+} from '../../lib/localStorage'
 
 type Props = {
   settingName: string
@@ -33,19 +36,24 @@ export const SettingsToggle = ({
 
   let descriptionJSX
   if (description !== '') {
-    const settingDescriptionClassName = classnames((displayLanguage === PREFERRED_DISPLAY_LANGUAGE ? 'local-font' : ''), 'text-xs text-gray-500 dark:text-gray-400')
+    const settingDescriptionClassName = classnames(
+      displayLanguage === PREFERRED_DISPLAY_LANGUAGE ? 'local-font' : '',
+      'text-xs text-gray-500 dark:text-gray-400'
+    )
     descriptionJSX = (
       <div className={settingDescriptionClassName}>{description}</div>
-      )
+    )
   }
 
   return (
     <div className="flex justify-between items-start gap-8 mt-3 mb-4">
       <div className="text-left">
-        <h2 className="local-font text-base text-gray-600 dark:text-gray-300">{settingName}</h2>
+        <h2 className="local-font text-base text-gray-600 dark:text-gray-300">
+          {settingName}
+        </h2>
         {description === '' ? '' : descriptionJSX}
       </div>
-      <div className='w-14'>
+      <div className="w-14">
         <div className={toggleHolder} onClick={() => handleFlag(!flag)}>
           <div className={toggleButton} />
         </div>
